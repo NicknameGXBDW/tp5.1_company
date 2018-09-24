@@ -1,0 +1,137 @@
+{include file="public/header" /}
+    <div id="wrapper">
+       
+
+    <div id="xh_container">
+        <div id="xh_content">
+
+        <div class="path"><a href='{:url('index/index')}'>主页</a> >
+        {foreach $posArr as $pos}
+            <a href="{:url('artlist/index',array('id'=>$pos.id))}">{$pos.name}</a> >
+        {/foreach}
+        </div><div class="clear"></div>
+            <div class="xh_area_h_3" style="margin-top: 40px;">
+                {foreach $artlist as $article}
+                <div class="xh_post_h_3 ofh">
+                            <div class="xh">
+                                <a target="_blank" href="/lookbike/bmx/240.html" title="{$article.title}">
+                                    <img src="{if $article.picture !=''}__UPLOADS__/{$article.picture}{else}__UPLOADS__/default.jpg{/if}" alt="{$article.keywords}" height="240" width="400">
+                                </a>
+                            </div>
+                            <div class="r ofh">
+                                <h2 class="xh_post_h_3_title ofh" style="height:60px;">
+                                    <a target="_blank" href="{:url('article/index',array('aid'=>$article.id))}" title="{$article.title}">{$article.title}</a>
+                                </h2>
+                                <span class="time">{$article.create_time}</span>
+                                <div class="xh_post_h_3_entry ofh" style="color:#555;height:80px; overflow:hidden;">
+                                                   {$article.desc}
+                                
+                                </div>
+                                <div class="b">
+                                    <a href="{:url('article/index',array('aid'=>$article.id))}" class="xh_readmore" rel="nofollow">read
+                                        more</a> <span title="0人赞" class="xh_love"><span class="textcontainer"><span>0</span></span> </span> <span title="{$article.click}人浏览" class="xh_views">
+                                                    {$article.click}</span>
+                                </div>
+                            </div>
+                        </div>
+                {/foreach}
+
+
+                        
+                    
+                <div id="pagination">
+                    <div class="wp-pagenavi">
+                    {$artlist|raw}
+                </div>
+                </div>
+            </div>
+        </div>
+        <div id="xh_sidebar">        
+<!-- 右侧 -->
+
+         <div class="widget">
+
+<div style="background: url('__INDEX__/images/hots_bg.png') no-repeat scroll 0 0 transparent;width:250px;height:52px;margin-bottom:15px;">
+</div>
+<ul id="ulHot">
+{foreach $hotArt as $hot}
+<li style="border-bottom:dashed 1px #ccc;height:70px; margin-bottom:15px;">
+<div style="float:left;width:85px;height:55px; overflow:hidden;"><a href="{:url('index/article/index',['aid'=>$hot.id])}" target="_blank"><img src="{if $hot.picture !=''}__UPLOADS__/{$hot.picture}{else}__UPLOADS__/default.jpg{/if}" width="83" title="{$hot.title}" /></a></div>
+<div style="float:right;width:145px;height:52px; overflow:hidden;">
+    <a href="{:url('index/article/index',['aid'=>$hot.id])}" target="_blank" title="{$hot.title}"> {$hot.title}</a></div>
+</li>
+    {/foreach}
+
+</ul>
+                </div>
+            
+
+
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="boxBor"></div>
+
+    <div class="boxBor" onclick="IBoxBor()" style="cursor:pointer;"></div>
+    <script type="text/javascript">
+        $(function () {
+            var imgHoverSetTimeOut = null;
+            $('.xh_265x265 img').hover(function () {
+                var oPosition = $(this).offset();
+                var oThis = $(this);
+                $(".boxBor").css({
+                    left: oPosition.left,
+                    top: oPosition.top,
+                    width: oThis.width(),
+                    height: oThis.height()
+                });
+                $(".boxBor").show();
+                var urlText = $(this).parent().attr("href");
+                $("#hdBoxbor").val(urlText);
+            }, function () {
+                imgHoverSetTimeOut = setTimeout(function () { $(".boxBor").hide(); }, 500);
+            });
+            $(".boxBor").hover(
+                function () {
+                    clearTimeout(imgHoverSetTimeOut);
+                }
+                , function () {
+                    $(".boxBor").hide();
+                }
+            );
+        });
+        function IBoxBor() {
+            window.open($("#hdBoxbor").val());
+        }
+        function goanewurl() {
+            window.open($("#hdUrlFocus").val());
+        }
+</script>
+
+    </div>
+
+<div id="footer_wrap">
+    <div id="footer">
+        <div class="footer_navi">
+            <ul id="menu-%e5%b0%be%e9%83%a8%e5%af%bc%e8%88%aa" class="menu">
+                <li id="menu-item-156" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-156">
+                    <a href="/aboutus.html">关于我们</a></li>
+                <li id="menu-item-157" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-157">
+                    <a href="/news/">行业资讯</a></li>
+                <li id="menu-item-158" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-158">
+                    <a href="/tougao.html">我要投稿</a></li>
+            </ul>
+        </div>
+        <div class="footer_info">
+            <span class="legal">Copyright &#169; 2016-2020 qq群： 版权所有&#160;&#160;&#160;<a href="#">
+                琼ICP备******号</a>&#160;&#160;&#160;
+        </div>
+    </div>
+</div>
+<div style="display: none;" id="scroll">
+</div>
+<script type="text/javascript" src="./style/z700bike_global.js"></script>
+
+</body>
+</html>
