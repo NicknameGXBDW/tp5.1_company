@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$system.site}
+        {if isset($catInfo)} -{$catInfo.name}{/if}
+        {if isset($article)} -{$article.title}{/if}
+    </title>
+    <meta name="description" content="{if isset($category)}{$category.desc}{elseif isset($article)}{$article.desc}{else}{$system.desc}{/if}" />
+    <meta name="keywords" content="{if isset($category)}{$category.keywords}{elseif isset($article)}{$article.keywords}{else}{$system.keywords}{/if}" />
+
+
+    <link rel="stylesheet" type="text/css" media="all" href="__INDEX__/style/style.css" />
+    <script src="__INDEX__/style/jquery-1.4.1.min.js" type="text/javascript"></script>
+    <script src="__INDEX__/style/jquery.js" type="text/javascript"></script>
+    <script src="__INDEX__/style/jtemplates.js" type="text/javascript"></script>
+    <script src="__INDEX__/style/lazy.js" type="text/javascript"></script>
+    <script type="text/javascript" src="__INDEX__/style/wp-sns-share.js"></script>
+    <script type="text/javascript" src="__INDEX__/style/voterajax.js"></script>
+    <script type="text/javascript" src="__INDEX__/style/userregister.js"></script>
+    <link rel="stylesheet" href="__INDEX__/style/pagenavi-css.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="__INDEX__/style/votestyles.css" type="text/css" />
+    <link rel="stylesheet" href="__INDEX__/style/voteitup.css" type="text/css" />
+    <link rel="stylesheet" href="__INDEX__/style/article.css" type="text/css" />
+
+
+</head>
+<body class="single2">
+ <script>
+ function subForm()
+ {
+
+        formsearch.submit();
+        //form1为form的id
+    }
+</script>
+<script type="text/javascript">
+    function showMask() {
+        $("#mask").css("height", $(document).height());
+        $("#mask").css("width", $(document).width());
+        $("#mask").show();
+    }
+</script>
+<div id="mask" class="mask" onclick="CloseMask()"></div>
+<div id="header_wrap">
+    <div id="header">
+        <div style="float: left; width: 310px;">
+            <h1>
+                <a href="{:url('index/index')}" title="thinkphp">thinkphp</a>
+                <div class="" id="logo-sub-class">
+                </div>
+            </h1>
+        </div>
+        <div id="navi">
+            <ul id="jsddm">
+                <li><a class="navi_home" href="{:url('index/index')}">首页</a></li>
+                {foreach $categorys as $category}
+                <li>
+                    <a href="http://localhost/tp5.1_qiye/public/index.php/index/{if $category.type ==1}artlist{elseif $category.type==2}imglist{else}page{/if}/index/id/{$category.id}" {if $category.children}class = "havechild"{else} class="test"{/if}>{$category.name}</a>
+                    <ul>
+                        {if $category.children}
+                        {foreach $category.children as $children}
+                        <li><a href="http://localhost/tp5.1_qiye/public/index.php/index/{if $children.type ==1}artlist{elseif $children.type==3}imglist{else}page{/if}/index/id/{$children.id}">{$children.name}</a></li>
+                        {/foreach}
+                        {/if}
+                    </ul>
+                </li>
+                {/foreach}
+            </ul>
+
+            <div style="clear: both;">
+            </div>
+        </div>
+        <div style="float: right; width: 209px;">
+            <div class="widget" style="height: 30px; padding-top: 20px;">
+                <div style="float: left;">
+                    <form  name="formsearch" action="{:url('search/index')}"><input type="hidden" name="kwtype" value="0" />
+                        <input name="q" type="text" style="background-color: #000000;padding-left: 10px; font-size: 12px;font-family: 'Microsoft Yahei'; color: #999999;height: 29px; width: 160px; border: solid 1px #666666; line-height: 28px;" id="go" value="在这里搜索..." onfocus="if(this.value=='在这里搜索...'){this.value='';}"  onblur="if(this.value==''){this.value='在这里搜索...';}" />
+                    </form>
+                </div>
+                <div style="float: left;">
+                    <img src="__INDEX__/images/search-new.png" id="imgSearch" style="cursor: pointer; margin: 0px;
+                        padding: 0px;" onclick="subForm()"  /></div>
+                <div style="clear: both;">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
